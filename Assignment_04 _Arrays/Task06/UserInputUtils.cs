@@ -4,35 +4,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task05
+namespace Task06
 {
     public static class UserInputUtils
     {
-        public static int GetChoice(string message)
+        public static int GetPositiveInteger(string message)
         {
-            int choice = default;
-            bool isValidChoice = false;
+            int number = default;
+            bool isValidNumber = false;
 
-            while (!isValidChoice)
+            while (!isValidNumber)
             {
                 Console.Write(message);
-                string choiceInput = Console.ReadLine();
-                isValidChoice = int.TryParse(choiceInput, out choice) && (choice == 1 || choice == 2);
+                string numberInput = Console.ReadLine();
 
-                if (!isValidChoice)
+                if (!int.TryParse(numberInput, out number) || number <= 0)
                 {
-                    Console.WriteLine("Invalid choice. Please enter a valid integer.");
+                    Console.WriteLine("Invalid input. Please enter a positive integer.");
+                }
+                else
+                {
+                    isValidNumber = true;
                 }
             }
 
-            return choice;
+            return number;
         }
 
         public static int[,] GetMatrixElements(int rows, int cols)
         {
             int[,] matrix = new int[rows, cols];
 
-            Console.WriteLine("Enter matrix elements:");
+            Console.WriteLine($"Enter matrix elements ({rows} x {cols}):");
 
             for (int i = 0; i < rows; i++)
             {
