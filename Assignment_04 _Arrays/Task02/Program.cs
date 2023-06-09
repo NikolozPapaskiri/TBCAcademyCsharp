@@ -54,7 +54,7 @@ namespace Task02
 
             foreach (string element in combinedArray)
             {
-                Console.Write(element + " ");
+                Console.Write(element + ", ");
             }
         }
     }
