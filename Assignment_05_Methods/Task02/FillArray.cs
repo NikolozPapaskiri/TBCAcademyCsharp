@@ -15,7 +15,7 @@ namespace Task02
 
             while (!int.TryParse(Console.ReadLine(), out size) || size <= 0)
             {
-                Console.WriteLine("Invalid input. Please enter a positive integer for the array size.");
+                Console.Write("Invalid input. Please enter a positive integer for the array size: ");
             }
 
             char[] array = new char[size];
