@@ -4,22 +4,29 @@
     {
         public static void Main(string[] args)
         {
-            Library library = new Library(5);
+            Library library = new Library(4);
 
-            // Add books to the library
+            // წიგნების დამატება ბიბლიოთეკაში
             library.AddBook(new Book { Title = "Book 1", Author = "Author 1", Year = 2021 });
             library.AddBook(new Book { Title = "Book 2", Author = "Author 2", Year = 2022 });
             library.AddBook(new Book { Title = "Book 3", Author = "Author 3", Year = 2023 });
+            library.AddBook(new Book { Title = "Book 4", Author = "Author 4", Year = 2023 });
+            library.AddBook(new Book { Title = "Book 5", Author = "Author 5", Year = 2023 });//არუნდა დაამატოს უკვე სავსეა Library
 
-            // Access books using indexer
+            // მივწვდეთ წიგნებს ინდექსებით
             Console.WriteLine("Book at index 1: " + library[1].Title);
 
-            // Remove a book
+            // წიგნის წაშლა ბიბლიოთეკიდან
             library.RemoveBook(library[1]);
 
-            // Find a book
-            Book foundBook = library.FindBook("Book 3");
-            Console.WriteLine("Found book: " + foundBook?.Title);
+            // წიგნის პოვნა
+            Book notFoundBook = library.FindBook("Book 55");//ისეთი წიგნი რომელიც არ გვაქ ბიბლიოთეკაში
+            if(notFoundBook != null)
+                Console.WriteLine("Found book: " + notFoundBook?.Title);
+
+            Book foundBook = library.FindBook("Book 3");//ისეთი წიგნი რომელიც გვაქ ბიბლიოთეკაში
+            if (foundBook != null)
+                Console.WriteLine("Found book: " + foundBook?.Title);
 
             Console.WriteLine("Number of books in the library: " + library.Count);
 

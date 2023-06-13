@@ -11,8 +11,6 @@ namespace LibrarySystem
         public string Title { get; set; }
         public string Author { get; set; }
         public int Year { get; set; }
-
-        // Add any additional fields or properties as desired
     }
 
 

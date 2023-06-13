@@ -37,7 +37,7 @@ namespace LibrarySystem
 
             int index = Array.FindIndex(_books, b => b == null);
             _books[index] = book;
-            Console.WriteLine("Book added successfully.");
+            Console.WriteLine($"{book.Title} added successfully in the library.");
         }
 
         public void RemoveBook(Book book)
@@ -45,17 +45,22 @@ namespace LibrarySystem
             int index = Array.IndexOf(_books, book);
             if (index == -1)
             {
-                Console.WriteLine("Book not found in the library.");
+                Console.WriteLine("There isn't such a book in the library.");
                 return;
             }
 
             _books[index] = null;
-            Console.WriteLine("Book removed successfully.");
+            Console.WriteLine("Book removed from library successfully.");
         }
 
         public Book FindBook(string title)
         {
-            return Array.Find(_books, b => b?.Title == title);
+            Book book = Array.Find(_books, b => b?.Title == title);
+
+            if(book == null)
+                Console.WriteLine($"There is no such a book in library as {title}");
+
+            return book;
         }
     }
 }
