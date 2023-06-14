@@ -13,12 +13,15 @@
             library.AddBook(new Book { Title = "Book 4", Author = "Author 4", Year = 2023 });
             library.AddBook(new Book { Title = "Book 5", Author = "Author 5", Year = 2023 });//არუნდა დაამატოს უკვე სავსეა Library
 
+            Console.WriteLine();
             // მივწვდეთ წიგნებს ინდექსებით
             Console.WriteLine("Book at index 1: " + library[1].Title);
 
+            Console.WriteLine();
             // წიგნის წაშლა ბიბლიოთეკიდან
             library.RemoveBook(library[1]);
 
+            Console.WriteLine();
             // წიგნის პოვნა
             Book notFoundBook = library.FindBook("Book 55");//ისეთი წიგნი რომელიც არ გვაქ ბიბლიოთეკაში
             if(notFoundBook != null)
@@ -28,6 +31,7 @@
             if (foundBook != null)
                 Console.WriteLine("Found book: " + foundBook?.Title);
 
+            Console.WriteLine();
             Console.WriteLine("Number of books in the library: " + library.Count);
 
         }
