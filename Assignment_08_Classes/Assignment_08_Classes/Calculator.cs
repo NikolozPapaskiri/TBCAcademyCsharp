@@ -4,29 +4,22 @@ namespace CalculatorApp
 {
     public static class Calculator
     {
-        public static double Add(double a, double b)
-        {
-            return a + b;
-        }
+        private const double Epsilon = 1e-15;
 
-        public static double Subtract(double a, double b)
-        {
-            return a - b;
-        }
+        public static double Add(double a, double b) => RoundToTwoDecimals(a + b);
 
-        public static double Multiply(double a, double b)
-        {
-            return a * b;
-        }
+        public static double Subtract(double a, double b) => RoundToTwoDecimals(a - b);
+
+        public static double Multiply(double a, double b) => RoundToTwoDecimals(a * b);
 
         public static double Divide(double a, double b)
         {
-            if (b == 0)
+            if (Math.Abs(b) < Epsilon)
             {
                 throw new ArgumentException("Cannot divide by zero.");
             }
 
-            return a / b;
+            return RoundToTwoDecimals(a / b);
         }
 
         public static double Pow(double number, int power)
@@ -43,7 +36,7 @@ namespace CalculatorApp
                 result *= number;
             }
 
-            return result;
+            return RoundToTwoDecimals(result);
         }
 
         public static double Sqrt(double number)
@@ -54,14 +47,18 @@ namespace CalculatorApp
             }
 
             double result = number;
-            double epsilon = 1e-15;
 
-            while (Math.Abs(result - number / result) > epsilon * result)
+            while (Math.Abs(result - number / result) > Epsilon * result)
             {
                 result = (result + number / result) / 2;
             }
 
-            return result;
+            return RoundToTwoDecimals(result);
+        }
+
+        private static double RoundToTwoDecimals(double number)
+        {
+            return Math.Round(number, 2);
         }
     }
 }
