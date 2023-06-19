@@ -101,10 +101,19 @@ namespace CustomListImplementation
                 _items.Clear();
             }
 
-            public T Find(Predicate<T> predicate)
+            public T[] Find(Predicate<T> predicate)
             {
-                return _items.Find(predicate);
+                List<T> foundItems = new List<T>();
+                foreach (T item in _items)
+                {
+                    if (predicate(item))
+                    {
+                        foundItems.Add(item);
+                    }
+                }
+                return foundItems.ToArray();
             }
+
 
             public IEnumerator<T> GetEnumerator()
             {

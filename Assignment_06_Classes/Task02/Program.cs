@@ -1,5 +1,6 @@
 ﻿using CustomListImplementation.CustomListImplementation;
 using System;
+using System.Threading.Channels;
 
 namespace CustomListImplementation
 {
@@ -46,6 +47,7 @@ namespace CustomListImplementation
 
             carList.AddList(anotherCarList);//AddList
 
+            Console.WriteLine();
             Console.WriteLine("Car List after adding another list in it:");
             foreach (Car car in carList)
             {
@@ -66,15 +68,15 @@ namespace CustomListImplementation
             Console.WriteLine("InsertList: " + isListInserted);
 
             Car retrievedCar = carList.GetElement(3);//GetElement
-            Console.WriteLine("GetElement: " + (retrievedCar != null ? retrievedCar.Brand + " " + retrievedCar.Model : "Invalid position"));
+            Console.WriteLine("GetElement : " + (retrievedCar != null ? retrievedCar.Brand + " " + retrievedCar.Model : "Invalid position"));
 
             CustomList<Car> sublist = carList.GetList(2, 3);//GetList
-            Console.WriteLine("GetList:");
+            Console.Write("GetList : ");
             if (sublist != null)
             {
                 foreach (Car car in sublist)
                 {
-                    Console.WriteLine(car.Brand + " " + car.Model);
+                    Console.Write(car.Brand + " " + car.Model + ",");
                 }
             }
             else
@@ -82,16 +84,32 @@ namespace CustomListImplementation
                 Console.WriteLine("Invalid position");
             }
 
-            Car foundCar = carList.Find(car => car.Brand == "BMW");
-            Console.WriteLine("Find: " + (foundCar != null ? foundCar.Brand + " " + foundCar.Model : "Car not found"));
+            Car[] foundCars = carList.Find(car => car.Year == 2022); // Find cars made in 2022 - რომელ პარამეტრსაც მიუთითებ იმის მიხედვით მოძებნის ყველა შემთხვევას
 
-            bool isRemoved = carList.RemoveElement(anotherCarList[1]);
+            string result = "\nFound cars: ";
+            if (foundCars.Length > 0)
+            {
+                foreach (Car car in foundCars)
+                {
+                    result += $"{car.Brand} {car.Model} {car.Year}, ";
+                }
+                result = result.TrimEnd(',', ' ');
+            }
+            else
+            {
+                result += "Car not found";
+            }
+
+            Console.WriteLine(result);
+
+            bool isRemoved = carList.RemoveElement(anotherCarList[1]);//RemoveElement
             Console.WriteLine("RemoveElement: " + isRemoved);
 
             bool isListRemoved = carList.RemoveList(additionalCarList);
             Console.WriteLine("RemoveList: " + isListRemoved);
 
-            carList.Clear();
+            Console.WriteLine("Count before clearing: " + carList.Count);
+            carList.Clear();//Clear
             Console.WriteLine("Count after clearing: " + carList.Count);
 
             Console.ReadLine();
@@ -116,8 +134,6 @@ RemoveList - მეთოდი წაშლის გადაცემულ �
 Clear - მეთოდი წაშლის სიაში არსებულ ყველა ელემენტს;
 Find - მეთოდი გადაცემული პარამეტრით მოძებნის შესაბამის ელემენტს სიაში და დააბრუნებს მას;
 List-ს უნდა ქონდეს შემდეგი Property-ები:
-Count - 
-
-დაგვიბრუნებს ელემენტების რაოდენობას სიაში;
+Count - დაგვიბრუნებს ელემენტების რაოდენობას სიაში;
 
 */
