@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Assignment_13__Exceptions
 {
@@ -26,12 +27,39 @@ namespace Assignment_13__Exceptions
                 for (int i = 0; i < numBooks; i++)
                 {
                     Console.WriteLine($"Enter details for Book {i + 1}:");
-                    Console.Write("Book Number: ");
-                    int bookNumber = ReadInput.ReadPositiveInteger();
-                    Console.Write("Title: ");
-                    string title = Console.ReadLine();
-                    Console.Write("Author: ");
-                    string author = Console.ReadLine();
+
+                    int bookNumber;
+                    do
+                    {
+                        Console.Write("Book Number: ");
+                        string bookNumberInput = Console.ReadLine();
+                        if (!int.TryParse(bookNumberInput, out bookNumber) || bookNumber <= 0)
+                        {
+                            Console.WriteLine("Invalid input. Book Number must be a positive integer.");
+                        }
+                    } while (bookNumber <= 0);
+
+                    string title;
+                    do
+                    {
+                        Console.Write("Title: ");
+                        title = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(title))
+                        {
+                            Console.WriteLine("Invalid input. Title cannot be null or empty.");
+                        }
+                    } while (string.IsNullOrWhiteSpace(title));
+
+                    string author;
+                    do
+                    {
+                        Console.Write("Author: ");
+                        author = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(author))
+                        {
+                            Console.WriteLine("Invalid input. Author cannot be null or empty.");
+                        }
+                    } while (string.IsNullOrWhiteSpace(author));
 
                     Book book = new Book(bookNumber, title, author);
                     library.AddBook(book);

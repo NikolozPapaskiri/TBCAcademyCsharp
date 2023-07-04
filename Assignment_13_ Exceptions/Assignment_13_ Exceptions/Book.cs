@@ -14,11 +14,14 @@ namespace Assignment_13__Exceptions
 
         public Book(int bookNumber, string title, string author)
         {
+            if (bookNumber is <= 0)
+                throw new ArgumentOutOfRangeException(nameof(bookNumber), "Book number must be a positive integer.");
+
             if (string.IsNullOrWhiteSpace(title))
-                throw new ArgumentNullException(nameof(title), "Title cannot be null or empty.");
+                throw new ArgumentException("Title cannot be null or empty.", nameof(title));
 
             if (string.IsNullOrWhiteSpace(author))
-                throw new ArgumentNullException(nameof(author), "Author cannot be null or empty.");
+                throw new ArgumentException("Author cannot be null or empty.", nameof(author));
 
             BookNumber = bookNumber;
             Title = title;

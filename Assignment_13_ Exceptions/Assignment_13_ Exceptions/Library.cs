@@ -29,6 +29,9 @@ namespace Assignment_13__Exceptions
             if (books.Count >= Capacity)
                 throw new IndexOutOfRangeException("Library capacity reached. Cannot add more books.");
 
+            if (books.Any(b => b.BookNumber == book.BookNumber))
+                throw new ArgumentException($"A book with the same book number '{book.BookNumber}' already exists in the library.");
+
             books.Add(book);
         }
 
